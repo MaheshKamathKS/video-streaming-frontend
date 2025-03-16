@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            font-weight: bold;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Sign Up</h2>
+        <form name="myform" onsubmit="return validateForm()">
+            <div class="input-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name">
+                <div class="error" id="nameError"></div>
+            </div>
+            <div class="input-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="num" maxlength="10">
+                <div class="error" id="phoneError"></div>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+                <div class="error" id="passwordError"></div>
+            </div>
+            <div class="input-group">
+                <label for="password1">Retype Password</label>
+                <input type="password" id="password1" name="password1">
+                <div class="error" id="passwordMatchError"></div>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email">
+                <div class="error" id="emailError"></div>
+            </div>
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            var name = document.myform.name.value;
+            var password = document.myform.password.value;
+            var phone = document.myform.num.value;
+            var firstpassword = document.myform.password.value;
+            var secondpassword = document.myform.password1.value;
+            var email = document.myform.email.value;
+            var atpos = email.indexOf("@");
+            var dotpos = email.lastIndexOf(".");
+            var isValid = true;
+            
+            if (name == null || name == "") {
+                alert("Name can't be blank");
+                isValid = false;
+            }
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters long.");
+                isValid = false;
+            }
+            if (firstpassword !== secondpassword) {
+                alert("Passwords must match!");
+                isValid = false;
+            }
+            if (isNaN(phone) || phone.length !== 10) {
+                alert("Enter a valid 10-digit phone number");
+                isValid = false;
+            }
+            if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length) {
+                alert("Please enter a valid email address");
+                isValid = false;
+            }
+            
+            if (isValid) {
+                window.location.href = "signedhome.html"; 
+            }
+            
+            return false; 
+        }
+        
+    </script>
+</body>
+</html>
